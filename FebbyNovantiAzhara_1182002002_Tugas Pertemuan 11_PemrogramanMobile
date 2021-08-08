@@ -1,0 +1,178 @@
+Nama	: Febby Novanti Azhara
+NIM	: 1182002002
+
+Pemrograman Bergerak
+Tugas Pertemuan 11
+
+Navigasi TabBarView
+
+Coding :
+
+Main.dart 
+
+import 'package:flutter/material.dart';
+
+import './Chats.dart' as chats;
+import './Calls.dart' as calls;
+import './Timeline.dart' as timeline;
+import './more.dart' as more;
+
+void main(){
+  runApp(new MaterialApp(
+   title: "Tampilan Tab Bar",
+   home: new Home(),
+  ));
+}
+
+class  Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+
+  //create controller untuk tabBar
+  TabController controller;
+
+  @override
+
+  void initState(){
+    controller = new TabController(vsync: this, length: 4);
+    //tambahkan SingleTickerProviderStateMikin pada class _HomeState
+    super.initState();
+  }
+
+  @override
+  void dispose(){
+    controller.dispose();
+    super.dispose();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      //create appBar
+      appBar: new AppBar(
+        //warna background
+        backgroundColor: Colors.green[800],
+         //judul
+         title: new Text("Pesan Saya"),
+           //bottom
+           bottom: new TabBar(
+             controller: controller,
+             tabs: <Widget>[
+              new Tab(icon: new Icon(Icons.chat), text: "Chats",),
+              new Tab(icon: new Icon(Icons.call), text: "Calls",),
+              new Tab(icon: new Icon(Icons.timeline), text: "Timeline",),
+              new Tab(icon: new Icon(Icons.more), text: "More",), 
+             ],
+        ),
+      ),
+
+      //source code lanjutan
+      //buat body untuk tab viewnya
+      body: new TabBarView(
+        //controller untuk tab bar
+        controller: controller,
+        children: <Widget>[
+          //kemudian panggil halaman sesuai tab yang sudah dibuat
+          new chats.Chats(),
+          new calls.Calls(),
+          new timeline.Timeline(),
+          new more.More()
+        ],
+      ),
+    );
+  }
+}
+
+
+Chats.dart
+
+import 'package:flutter/material.dart';
+
+class Chats extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      child: new Center(
+        child: Column(
+          children: <Widget>[
+            new Padding(padding: new EdgeInsets.all(20.0),),
+            new Padding(padding: new EdgeInsets.all(20.0),),
+            new Icon(Icons.chat,size: 90.0,color: Colors.lightBlueAccent,),
+            new Text("Chats", style: new TextStyle(fontSize: 30.0, color: Colors.green[800]),)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+Calls.dart
+
+import 'package:flutter/material.dart';
+
+class Calls extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      child: new Center(
+        child: Column(
+          children: <Widget>[
+            new Padding(padding: new EdgeInsets.all(20.0),),
+            new Padding(padding: new EdgeInsets.all(20.0),),
+            new Icon(Icons.call,size: 90.0, color: Colors.lightBlueAccent,),
+            new Text("Calls", style: new TextStyle(fontSize: 30.0, color: Colors.green[800]),)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+Timeline.dart
+
+import 'package:flutter/material.dart';
+
+class Timeline extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      child: new Center(
+        child: Column(
+          children: <Widget>[
+            new Padding(padding: new EdgeInsets.all(20.0),),
+            new Padding(padding: new EdgeInsets.all(20.0),),
+            new Icon(Icons.timeline,size: 90.0, color: Colors.lightBlueAccent,),
+            new Text("Timeline", style: new TextStyle(fontSize: 30.0, color: Colors.green[800]),)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+more.dart
+
+import 'package:flutter/material.dart';
+
+class More extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      child: new Center(
+        child: Column(
+          children: <Widget>[
+            new Padding(padding: new EdgeInsets.all(20.0),),
+            new Padding(padding: new EdgeInsets.all(20.0),),
+            new Icon(Icons.more,size: 90.0, color: Colors.lightBlueAccent,),
+            new Text("More", style: new TextStyle(fontSize: 30.0, color: Colors.green[800]),)
+          ],
+        ),
+      ),
+    );
+  }
+}
