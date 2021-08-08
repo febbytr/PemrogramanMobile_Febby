@@ -1,0 +1,118 @@
+Nama		: Febby Novanti Azhara
+NIM		: 1182002002
+Mata Kuliah	: Pemrograman Mobile
+
+Tugas Pertemuan 10
+
+
+
+Membuat Buttom Tab Riview
+
+
+
+Koding :
+
+
+// Bottom TabBar
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Toko Serba Ada',
+      theme: ThemeData(
+        
+        primarySwatch: Colors.orange,
+      ),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+  int _selectedIndex = 1;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _setTime() {
+    print('Set Time');
+  }
+
+  void _addTime() {
+    print('ADD TIME');
+  }
+
+  void itemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Serba Ada'),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.adb),
+              tooltip: 'Pilihan',
+              onPressed: _setTime),
+          IconButton(
+              icon: Icon(Icons.donut_large),
+              tooltip: 'Keranjang',
+              onPressed: _addTime),
+        ],
+      ),
+      body: Center(
+
+          child: Container(
+
+        child: GestureDetector(
+          onPanDown: (DragDownDetails details) {
+            print('Pan Down');
+            print(details);
+          },
+          child: new Image(
+            image:  NetworkImage(
+                "https://1.bp.blogspot.com/-PcrpYSNCMdM/XedxxbXPebI/AAAAAAAAKc0/kiSxg0ep0QYZuEAwI1sSkCjVmMXo3RD9gCNcBGAsYHQ/s640/2017-09-17.jpg"),
+          ),
+        ),
+      )),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Beranda')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.message), title: Text('Pesan')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_box), title: Text('Profil')),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: itemTapped,
+        fixedColor: Colors.orange,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Tambahkan',
+        child: Icon(Icons.add_box),
+      ),
+    );
+  }
+}
